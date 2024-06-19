@@ -8,8 +8,6 @@ if 'model' not in st.session_state:
     st.session_state.model = None
 if 'model_loaded' not in st.session_state:
     st.session_state.model_loaded = False
-if 'dark_mode' not in st.session_state:
-    st.session_state.dark_mode = False
 
 # Function to load the Whisper model
 def load_model(model_name):
@@ -17,46 +15,8 @@ def load_model(model_name):
     st.session_state.model_loaded = True
     st.sidebar.success(f"Whisper Model '{model_name}' Loaded")
 
-# Function to toggle theme
-def toggle_theme():
-    st.session_state.dark_mode = not st.session_state.dark_mode
-
-# Apply the theme
-def apply_theme():
-    if st.session_state.dark_mode:
-        st.markdown(
-            """
-            <style>
-            body {
-                background-color: #0e1117;
-                color: white;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            """
-            <style>
-            body {
-                background-color: white;
-                color: black;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-
 # Title of the app
 st.title("Whisper Transcription App")
-
-# Theme toggle button
-if st.sidebar.button("Toggle Light/Dark Mode"):
-    toggle_theme()
-
-# Apply the selected theme
-apply_theme()
 
 # File uploader for audio
 audio_file = st.file_uploader("Upload Audio", type=["wav", "mp3", "m4a"])
